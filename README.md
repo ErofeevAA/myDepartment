@@ -1,2 +1,2 @@
 # myDepartment
-A simple app for departments FEFU
+Simple app for FEFU's departments
