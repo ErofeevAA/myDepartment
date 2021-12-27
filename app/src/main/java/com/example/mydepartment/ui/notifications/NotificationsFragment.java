@@ -16,7 +16,6 @@ import com.example.mydepartment.R;
 import com.example.mydepartment.databinding.FragmentNotificationsBinding;
 
 public class NotificationsFragment extends Fragment {
-
     private FragmentNotificationsBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,

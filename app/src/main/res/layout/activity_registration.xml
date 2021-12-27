@@ -48,7 +48,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autofillHints="emailAddress"
-                android:hint="@string/family_name"
+                android:hint="@string/surname"
                 android:inputType="textPersonName" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -100,7 +100,8 @@
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toTopOf="@+id/sign_up"
             app:layout_constraintTop_toBottomOf="@+id/layout_email"
-            tools:layout_editor_absoluteX="20dp">
+            tools:layout_editor_absoluteX="20dp"
+            app:passwordToggleEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/password"

@@ -26,14 +26,14 @@ public class RegistrationActivity extends AppCompatActivity {
     }
 
     private ArrayAdapter<String> getRoleAdapter() {
-        String[] plug = {"В темнице", "Тёмной", "В час ночной"};
+        String[] plug = {getString(R.string.choose_role), "admin", "department_head", "teacher", "student"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, plug);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         return adapter;
     }
 
     private ArrayAdapter<String> getGroupAdapter() {
-        String[] plug = {"Стоял", "С немытой", "Головой"};
+        String[] plug = {getString(R.string.choose_group), "Стоял", "С немытой", "Головой"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, plug);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         return adapter;

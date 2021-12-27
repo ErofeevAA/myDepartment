@@ -4,44 +4,104 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.home.AccountFragment">
+    tools:context=".ui.account.AccountFragment">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:src="@drawable/ic_default_person"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/content_des_ic_profile" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/text_view_full_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Имя Фамилия"
-        android:textSize="17sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
         tools:ignore="HardcodedText" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/text_view_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Роль: сантехник"
+        android:text="prosto@yadurak.ru"
         android:textSize="17sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView3"
+        android:layout_marginTop="5dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_full_name"
         tools:ignore="HardcodedText" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/header_role"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Группа: на рукаве"
-        android:textSize="17sp"
+        android:text="@string/ac_header_role"
+        android:textSize="18sp"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="5dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_email" />
+
+    <TextView
+        android:id="@+id/text_view_role"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="сантехник"
+        android:textSize="18sp"
+        android:layout_marginStart="5dp"
+        app:layout_constraintStart_toEndOf="@+id/header_role"
+        app:layout_constraintTop_toTopOf="@+id/header_role"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:visibility="invisible"
+        android:id="@+id/header_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:text="@string/ac_header_group"
+        android:textSize="18sp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/header_role" />
+
+    <TextView
+        android:visibility="invisible"
+        android:id="@+id/text_view_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="на рукаве"
+        android:textSize="18sp"
+        android:layout_marginStart="5dp"
+        app:layout_constraintStart_toEndOf="@+id/header_group"
+        app:layout_constraintTop_toTopOf="@id/header_group"
+        tools:ignore="HardcodedText" />
+
+    <com.google.android.material.button.MaterialButton
+        android:layout_marginBottom="60dp"
+        android:id="@+id/button_logout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/logout"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        tools:ignore="HardcodedText" />
+        android:textAllCaps="false"
+        app:cornerRadius="9dp"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:paddingStart="30dp"
+        android:paddingEnd="30dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

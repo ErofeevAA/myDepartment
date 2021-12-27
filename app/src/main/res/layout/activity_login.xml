@@ -13,7 +13,8 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@+id/layout_password"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed">
+        app:layout_constraintVertical_chainStyle="packed"
+        app:errorEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/email"
@@ -22,7 +23,8 @@
             android:layout_height="wrap_content"
             android:autofillHints="emailAddress"
             android:hint="@string/email"
-            android:inputType="textEmailAddress" />
+            android:inputType="textEmailAddress"
+            android:maxLines="1" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -31,7 +33,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@+id/sign_in"
-        app:layout_constraintTop_toBottomOf="@+id/layout_email">
+        app:layout_constraintTop_toBottomOf="@+id/layout_email"
+        app:passwordToggleEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/password"
@@ -40,7 +43,8 @@
             android:autofillHints="password"
             android:hint="@string/password"
             android:inputType="textPassword"
-            style="@style/TextInputAuthentication"/>
+            style="@style/TextInputAuthentication"
+            android:maxLines="1"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
