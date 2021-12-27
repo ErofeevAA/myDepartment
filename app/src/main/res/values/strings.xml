@@ -9,7 +9,7 @@
     <string name="surname">Surname</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
+    <string name="title_subjects">Subjects</string>
     <string name="title_notifications">Notifications</string>
     <string name="account">Account</string>
     <string name="choose_role">--choose role--</string>
@@ -18,4 +18,6 @@
     <string name="ac_header_role">Role:</string>
     <string name="ac_header_group">Group:</string>
     <string name="content_des_ic_profile">Profile Image</string>
+    <string name="choose_role_teacher">Teacher</string>
+    <string name="choose_role_student">Student</string>
 </resources>

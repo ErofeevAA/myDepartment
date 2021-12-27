@@ -12,10 +12,10 @@
         tools:layout="@layout/fragment_account" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.example.mydepartment.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/navigation_subjects"
+        android:name="com.example.mydepartment.ui.subjects.SubjectsFragments"
+        android:label="@string/title_subjects"
+        tools:layout="@layout/fragment_subjects" />
 
     <fragment
         android:id="@+id/navigation_notifications"

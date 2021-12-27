@@ -1,28 +1,23 @@
-package com.example.mydepartment.ui.dashboard;
+package com.example.mydepartment.ui.subjects;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 
-import com.example.mydepartment.R;
-import com.example.mydepartment.databinding.FragmentDashboardBinding;
+import com.example.mydepartment.databinding.FragmentSubjectsBinding;
 
-public class DashboardFragment extends Fragment {
+public class SubjectsFragments extends Fragment {
 
-    private FragmentDashboardBinding binding;
+    private FragmentSubjectsBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-        binding = FragmentDashboardBinding.inflate(inflater, container, false);
+        binding = FragmentSubjectsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         return root;
     }

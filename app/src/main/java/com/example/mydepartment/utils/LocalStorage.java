@@ -10,7 +10,6 @@ public class LocalStorage {
     private final String PREF_KEY_ROLE = "role";
     private final String PREF_KEY_EMAIL = "email";
     private final String PREF_KEY_GROUP = "group";
-    // private final String PREF_KEY_GROUP = "group";
 
     private final SharedPreferences preferences;
     private final SharedPreferences.Editor editor;
