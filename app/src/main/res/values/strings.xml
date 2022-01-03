@@ -20,4 +20,5 @@
     <string name="content_des_ic_profile">Profile Image</string>
     <string name="choose_role_teacher">Teacher</string>
     <string name="choose_role_student">Student</string>
+    <string name="no_subjects_for_you">No subjects for you</string>
 </resources>

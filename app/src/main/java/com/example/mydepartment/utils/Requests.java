@@ -32,7 +32,7 @@ public class Requests {
             connection.setRequestProperty("Content-Type", "application/json");
             connection.setRequestProperty("X-Requested-With", "XMLHttpRequest");
             if (token != null) {
-                Log.d("logoutReq", token);
+                Log.d("token", token);
                 connection.setRequestProperty("Authorization", "Bearer " + token);
             }
 
@@ -85,6 +85,24 @@ public class Requests {
     public void logout() {
         method = "POST";
         final String URI = "/logout";
+        send(URI, null);
+    }
+
+    public void subjects() {
+        method = "GET";
+        final String URI = "/subjects";
+        send(URI, null);
+    }
+
+    public void sections(String subjectID) {
+        method = "GET";
+        final String URI = "/subjects/" + subjectID + "/sections";
+        send(URI, null);
+    }
+
+    public void comments(String subjectID, String sectionID) {
+        method = "GET";
+        final String URI = "/subjects/" + subjectID + "/sections/" + sectionID + "/comments";
         send(URI, null);
     }
 

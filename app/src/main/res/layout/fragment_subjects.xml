@@ -10,6 +10,20 @@
         android:id="@+id/subjects_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:translationZ="1dp"
         />
+
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:id="@+id/text_nothing"
+        android:text="@string/no_subjects_for_you"
+        android:textSize="18sp"
+        android:translationZ="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
