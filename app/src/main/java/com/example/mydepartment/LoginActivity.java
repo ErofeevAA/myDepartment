@@ -3,13 +3,18 @@ package com.example.mydepartment;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.mydepartment.databinding.ActivityLoginBinding;
+import com.example.mydepartment.dialog.FailDialogBuilder;
 import com.example.mydepartment.utils.LocalStorage;
 import com.example.mydepartment.utils.Requests;
 
@@ -20,6 +25,8 @@ import java.util.Objects;
 
 public class LoginActivity extends AppCompatActivity {
     private ActivityLoginBinding binding;
+
+    private String response = null;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -41,6 +48,34 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(i);
         });
     }
+
+    private final Handler handler = new Handler(Looper.getMainLooper()) {
+
+        @Override
+        public void handleMessage(@NonNull Message msg) {
+            super.handleMessage(msg);
+            if(msg.what == 0) {
+                alertFail("Connection failed");
+                return;
+            }
+            if (msg.what == 422) {
+                alertFail("Incorrect login or/and password");
+                return;
+            }
+            if (msg.what == 423) {
+                alertFail("Your account is not confirmed");
+                return;
+            }
+            if (msg.what == 201) {
+                saveUser(response);
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+                return;
+            }
+            alertFail("Unexpected error");
+        }
+    };
 
     private boolean isCorrectInput() {
         int lEmail = Objects.requireNonNull(binding.email.getText()).length();
@@ -65,29 +100,11 @@ public class LoginActivity extends AppCompatActivity {
                 Requests requests = new Requests();
                 requests.login(data);
 
-                runOnUiThread(() -> {
-                    int code = requests.getStatusCode();
-                    if(code == 0) {
-                        alertFail("Connection failed");
-                        return;
-                    }
-
-                    Log.d("statusCode", String.valueOf(code));
-                    Log.d("message", requests.getResponse());
-
-                    if (code == 422) {
-                        alertFail("Incorrect login or/and password");
-                    } else if (code == 423) {
-                        alertFail("Your account is not confirmed");
-                    } else if (code == 201) {
-                        saveUser(requests.getResponse());
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                        startActivity(intent);
-                        finish();
-                    } else {
-                        alertFail("Unexpected error");
-                    }
-                });
+                int code = requests.getStatusCode();
+                response = requests.getResponse();
+                Log.d("statusCode", String.valueOf(code));
+                Log.d("message", response);
+                handler.sendEmptyMessage(code);
             }
         }.start();
     }
@@ -115,11 +132,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void alertFail(String alert) {
-        new AlertDialog.Builder(this)
-                .setTitle("Failed")
-                .setIcon(R.drawable.ic_baseline_warning_24)
-                .setMessage(alert)
-                .setPositiveButton("OK", (dialog, which) -> dialog.dismiss())
-                .show();
+        new FailDialogBuilder(this, alert).show();
     }
 }
