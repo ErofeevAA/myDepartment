@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/navigation_account"
         android:name="com.example.mydepartment.ui.account.AccountFragment"
-        android:label="@string/account"
+        android:label="@string/profile"
         tools:layout="@layout/fragment_account" />
 
     <fragment

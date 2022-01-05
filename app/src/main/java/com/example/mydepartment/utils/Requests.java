@@ -80,6 +80,7 @@ public class Requests {
     public void register(String data) {
         method = "POST";
         final String URI = "/register";
+        send(URI, data);
     }
 
     public void logout() {
@@ -103,6 +104,12 @@ public class Requests {
     public void comments(String subjectID, String sectionID) {
         method = "GET";
         final String URI = "/subjects/" + subjectID + "/sections/" + sectionID + "/comments";
+        send(URI, null);
+    }
+
+    public void groups() {
+        method = "GET";
+        final String URI = "/groups";
         send(URI, null);
     }
 

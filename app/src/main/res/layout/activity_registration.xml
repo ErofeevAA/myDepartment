@@ -19,11 +19,10 @@
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toTopOf="@+id/family_name_layout"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_chainStyle="packed"
-            tools:layout_editor_absoluteX="20dp">
+            app:layout_constraintVertical_chainStyle="packed">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/name"
+                android:id="@+id/text_view_name"
                 style="@style/TextInputAuthentication"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -37,13 +36,12 @@
             style="@style/TextInputLayoutAuthentication"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toTopOf="@+id/role"
+            app:layout_constraintBottom_toTopOf="@+id/group"
             app:layout_constraintTop_toBottomOf="@+id/name_layout"
-            app:layout_constraintVertical_chainStyle="packed"
-            tools:layout_editor_absoluteX="20dp">
+            app:layout_constraintVertical_chainStyle="packed">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/family_name"
+                android:id="@+id/text_view_surname"
                 style="@style/TextInputAuthentication"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -53,16 +51,6 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <Spinner
-            android:id="@+id/role"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            style="@style/ViewMarginAuthentication"
-            app:layout_constraintBottom_toTopOf="@+id/group"
-            app:layout_constraintTop_toBottomOf="@+id/family_name_layout" />
-
-        <Spinner
             android:id="@+id/group"
             android:layout_width="match_parent"
             android:layout_height="48dp"
@@ -70,7 +58,7 @@
             android:paddingBottom="10dp"
             style="@style/ViewMarginAuthentication"
             app:layout_constraintBottom_toTopOf="@+id/layout_email"
-            app:layout_constraintTop_toBottomOf="@+id/role" />
+            app:layout_constraintTop_toBottomOf="@+id/family_name_layout" />
 
 
         <com.google.android.material.textfield.TextInputLayout
@@ -84,7 +72,7 @@
             tools:layout_editor_absoluteX="20dp">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/email"
+                android:id="@+id/text_input_email"
                 style="@style/TextInputAuthentication"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -98,13 +86,12 @@
             style="@style/TextInputLayoutAuthentication"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toTopOf="@+id/sign_up"
+            app:layout_constraintBottom_toTopOf="@+id/button_sign_up"
             app:layout_constraintTop_toBottomOf="@+id/layout_email"
-            tools:layout_editor_absoluteX="20dp"
             app:passwordToggleEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/password"
+                android:id="@+id/text_view_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autofillHints="password"
@@ -114,15 +101,14 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/sign_up"
+            android:id="@+id/button_sign_up"
             style="@style/ButtonAuthentication"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/sign_up"
             app:cornerRadius="12dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/layout_password"
-            tools:layout_editor_absoluteX="20dp" />
+            app:layout_constraintTop_toBottomOf="@+id/layout_password" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

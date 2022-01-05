@@ -1,6 +1,5 @@
 package com.example.mydepartment;
 
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -55,11 +54,11 @@ public class LoginActivity extends AppCompatActivity {
         public void handleMessage(@NonNull Message msg) {
             super.handleMessage(msg);
             if(msg.what == 0) {
-                alertFail("Connection failed");
+                alertFail(getString(R.string.alert_connection_failed));
                 return;
             }
             if (msg.what == 422) {
-                alertFail("Incorrect login or/and password");
+                alertFail(getString(R.string.alert_incorrect_login_or_password));
                 return;
             }
             if (msg.what == 423) {
@@ -78,16 +77,16 @@ public class LoginActivity extends AppCompatActivity {
     };
 
     private boolean isCorrectInput() {
-        int lEmail = Objects.requireNonNull(binding.email.getText()).length();
-        int lPassword = Objects.requireNonNull(binding.password.getText()).length();
+        int lEmail = Objects.requireNonNull(binding.textInputEmail.getText()).length();
+        int lPassword = Objects.requireNonNull(binding.textViewPassword.getText()).length();
         return !(lEmail == 0 && lPassword == 0);
     }
 
     private void sendLogin() {
         JSONObject params = new JSONObject();
         try {
-            params.put("email", Objects.requireNonNull(binding.email.getText()).toString());
-            params.put("password", Objects.requireNonNull(binding.password.getText()).toString());
+            params.put("email", Objects.requireNonNull(binding.textInputEmail.getText()).toString());
+            params.put("password", Objects.requireNonNull(binding.textViewPassword.getText()).toString());
         } catch (JSONException e) {
             e.printStackTrace();
         }

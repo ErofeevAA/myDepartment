@@ -11,7 +11,7 @@
     <string name="title_home">Home</string>
     <string name="title_subjects">Subjects</string>
     <string name="title_notifications">Notifications</string>
-    <string name="account">Account</string>
+    <string name="profile">Profile</string>
     <string name="choose_role">--choose role--</string>
     <string name="choose_group">--choose group--</string>
     <string name="logout">Logout</string>
@@ -21,4 +21,13 @@
     <string name="choose_role_teacher">Teacher</string>
     <string name="choose_role_student">Student</string>
     <string name="no_subjects_for_you">No subjects for you</string>
+    <string name="recycler_item_teacher">Teacher:</string>
+    <string name="no_sections">No sections</string>
+    <string name="hint_message">Message</string>
+    <string name="alert_connection_failed">Connection failed</string>
+    <string name="alert_incorrect_login_or_password">Incorrect login or/and password</string>
+    <string name="alert_fill_all_field">Fill all field</string>
+    <string name="alert_check_field">Check all field on the correct</string>
+    <string name="alert_wrong_password_length">Password length must be more than 9 characters and less than 31</string>
+    <string name="toast_reg_success">Registration has been successfully</string>
 </resources>

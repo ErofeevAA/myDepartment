@@ -17,7 +17,7 @@
         app:errorEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/email"
+            android:id="@+id/text_input_email"
             style="@style/TextInputAuthentication"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -37,7 +37,7 @@
         app:passwordToggleEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/password"
+            android:id="@+id/text_view_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:autofillHints="password"

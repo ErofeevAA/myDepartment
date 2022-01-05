@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.mydepartment">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -12,6 +12,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyDepartment">
+        <activity
+            android:name=".CommentsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SectionsActivity"
+            android:exported="false"
+            android:label="Sections" />
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -25,12 +32,11 @@
         <activity
             android:name=".RegistrationActivity"
             android:exported="false"
-            android:theme="@style/Theme.Authentication"/>
+            android:theme="@style/Theme.Authentication" />
         <activity
             android:name=".LoginActivity"
             android:exported="false"
-            android:theme="@style/Theme.Authentication">
-        </activity>
+            android:theme="@style/Theme.Authentication" />
     </application>
 
 </manifest>

@@ -4,20 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.subjects.SubjectsFragments">
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/subjects_list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:translationZ="1dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+    tools:context=".SectionsActivity">
 
     <TextView
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:id="@+id/text_nothing"
-        android:text="@string/no_subjects_for_you"
+        android:text="@string/no_sections"
         android:textSize="18sp"
         android:translationZ="2dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -25,5 +18,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:visibility="gone"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/sections_list" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
