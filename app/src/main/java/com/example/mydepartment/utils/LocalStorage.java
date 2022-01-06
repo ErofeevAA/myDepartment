@@ -10,6 +10,7 @@ public class LocalStorage {
     private final String PREF_KEY_ROLE = "role";
     private final String PREF_KEY_EMAIL = "email";
     private final String PREF_KEY_GROUP = "group";
+    private final String PREF_KEY_AVATAR = "avatar";
 
     private final SharedPreferences preferences;
     private final SharedPreferences.Editor editor;
@@ -50,6 +51,11 @@ public class LocalStorage {
         editor.apply();
     }
 
+    public void setUrlAvatar(String url) {
+        editor.putString(PREF_KEY_AVATAR, url);
+        editor.apply();
+    }
+
     public String getToken() {
         return preferences.getString(PREF_KEY_TOKEN, null);
     }
@@ -72,6 +78,10 @@ public class LocalStorage {
 
     public String getGroup() {
         return preferences.getString(PREF_KEY_GROUP, null);
+    }
+
+    public String getUrlAvatar() {
+        return preferences.getString(PREF_KEY_AVATAR, null);
     }
 
     public void clear() {

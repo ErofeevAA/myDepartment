@@ -116,14 +116,22 @@ public class LoginActivity extends AppCompatActivity {
 
             LocalStorage storage = new LocalStorage(this);
             storage.setToken(params.getString("token"));
-            storage.setName(params.getJSONObject("user").getString("name"));
-            storage.setSurname(params.getJSONObject("user").getString("surname"));
-            storage.setEmail(params.getJSONObject("user").getString("email"));
 
-            String role = params.getJSONObject("user").getString("role");
+            JSONObject userObject = params.getJSONObject("user");
+
+            storage.setName(userObject.getString("name"));
+            storage.setSurname(userObject.getString("surname"));
+            storage.setEmail(userObject.getString("email"));
+
+            String role = userObject.getString("role");
             storage.setRole(role);
             if (role.equals("student")) {
-                storage.setGroup(params.getJSONObject("user").getString("group"));
+                storage.setGroup(userObject.getString("group"));
+            }
+
+            String urlImg = userObject.getString("avatar");
+            if (!urlImg.equals("null")) {
+                storage.setUrlAvatar(urlImg);
             }
         } catch (JSONException e) {
             e.printStackTrace();

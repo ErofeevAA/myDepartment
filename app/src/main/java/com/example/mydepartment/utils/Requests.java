@@ -1,9 +1,12 @@
 package com.example.mydepartment.utils;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
@@ -61,11 +64,28 @@ public class Requests {
                 stringBuilder.append(line);
             }
             buffer.close();
+            reader.close();
             response = stringBuilder.toString();
 
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public Bitmap loadImage(String link) {
+        try {
+            URL url = new URL(link);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setDoInput(true);
+            connection.connect();
+            InputStream input = connection.getInputStream();
+            Bitmap myBitmap = BitmapFactory.decodeStream(input);
+            input.close();
+            return myBitmap;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public void login(String data) {

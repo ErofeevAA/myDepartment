@@ -1,6 +1,7 @@
 package com.example.mydepartment.ui.account;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -39,6 +40,13 @@ public class AccountFragment extends Fragment {
         binding.textViewEmail.setText(storage.getEmail());
         binding.textViewRole.setText(storage.getRole());
 
+        String urlImg = storage.getUrlAvatar();
+        if (urlImg != null) {
+            LoadAvatarThread thread = new LoadAvatarThread();
+            thread.setUrl(urlImg);
+            thread.start();
+        }
+
         String group = storage.getGroup();
         if (group != null) {
             binding.headerGroup.setVisibility(View.VISIBLE);
@@ -46,6 +54,24 @@ public class AccountFragment extends Fragment {
             binding.textViewGroup.setText(group);
         }
 
+    }
+
+    private final class LoadAvatarThread extends Thread {
+        private String url;
+
+        @Override
+        public void run() {
+            super.run();
+            Requests requests = new Requests();
+            Bitmap bitmap = requests.loadImage(url);
+            if (bitmap != null) {
+                requireActivity().runOnUiThread(() -> binding.imageViewAvatar.setImageBitmap(bitmap));
+            }
+        }
+
+        public void setUrl(String url) {
+            this.url = url;
+        }
     }
 
     private void logout() {
