@@ -1,17 +1,28 @@
 package com.example.mydepartment;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.provider.MediaStore;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,10 +35,17 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
+
 public class RegistrationActivity extends AppCompatActivity {
     private JSONArray groupsJSONArray;
     private int chosen_group = -1;
     private String data;
+    private String encodeImage = null;
+
+    private TextView textViewStateAvatar;
+
+    private ImageView imageAvatar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +63,13 @@ public class RegistrationActivity extends AppCompatActivity {
         TextView textViewSurname = binding.textViewSurname;
         TextView textViewEmail = binding.textInputEmail;
         TextView textViewPassword = binding.textViewPassword;
+
+        imageAvatar = binding.imageViewAvatar;
+
+        textViewStateAvatar = binding.textViewStateAvatar;
+
+        LinearLayout linearLayout = binding.layoutAddAvatar;
+        linearLayout.setOnClickListener(addImage);
 
         Button buttonSignUp = binding.buttonSignUp;
         buttonSignUp.setOnClickListener(v -> {
@@ -67,7 +92,9 @@ public class RegistrationActivity extends AppCompatActivity {
                     object.put("name", name);
                     object.put("surname", surname);
                     object.put("password", password);
-                    //object.put("avatar", "null");
+                    if (encodeImage != null) {
+                        object.put("avatar", encodeImage);
+                    }
                     object.put("group", group);
                     data = object.toString();
                     Log.d("Data", data);
@@ -94,6 +121,30 @@ public class RegistrationActivity extends AppCompatActivity {
         });
     }
 
+    private final ActivityResultLauncher<Intent> someActivityResultLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if (result.getResultCode() == Activity.RESULT_OK) {
+                    Intent data = result.getData();
+                    if (data != null) {
+                        Uri uri = data.getData();
+                        imageAvatar.setImageURI(uri);
+                        BitmapDrawable drawable = (BitmapDrawable) imageAvatar.getDrawable();
+                        Bitmap bitmap = drawable.getBitmap();
+                        ByteArrayOutputStream b = new ByteArrayOutputStream();
+                        bitmap.compress(Bitmap.CompressFormat.PNG, 0, b);
+                        encodeImage = Base64.encodeToString(b.toByteArray(), Base64.DEFAULT);
+                        Log.d("encodeImage", encodeImage);
+
+                        textViewStateAvatar.setText(R.string.image_has_been_added);
+                    }
+                }
+            });
+
+    private final View.OnClickListener addImage = v -> {
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        someActivityResultLauncher.launch(intent);
+    };
 
     private final Handler handler = new Handler(Looper.getMainLooper()) {
         @Override

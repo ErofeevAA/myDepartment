@@ -86,7 +86,7 @@
             style="@style/TextInputLayoutAuthentication"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toTopOf="@+id/button_sign_up"
+            app:layout_constraintBottom_toTopOf="@id/layout_add_avatar"
             app:layout_constraintTop_toBottomOf="@+id/layout_email"
             app:passwordToggleEnabled="true">
 
@@ -100,6 +100,32 @@
                 style="@style/TextInputAuthentication"/>
         </com.google.android.material.textfield.TextInputLayout>
 
+        <LinearLayout
+            android:id="@+id/layout_add_avatar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:layout_marginTop="30dp"
+            app:layout_constraintBottom_toTopOf="@id/button_sign_up"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layout_password">
+
+            <ImageView
+                android:id="@+id/image_view_avatar"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_sharp_attach_file_24" />
+
+            <TextView
+                android:id="@+id/text_view_state_avatar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/you_can_add_your_image"
+                android:textSize="20sp" />
+        </LinearLayout>
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/button_sign_up"
             style="@style/ButtonAuthentication"
@@ -108,7 +134,6 @@
             android:text="@string/sign_up"
             app:cornerRadius="12dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/layout_password" />
-
+            app:layout_constraintTop_toBottomOf="@+id/layout_add_avatar" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

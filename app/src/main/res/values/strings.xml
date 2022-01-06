@@ -31,4 +31,6 @@
     <string name="alert_wrong_password_length">Password length must be more than 9 characters and less than 31</string>
     <string name="toast_reg_success">Registration has been successfully</string>
     <string name="item_comment_teacher">Teacher</string>
+    <string name="you_can_add_your_image">You can add your image</string>
+    <string name="image_has_been_added">Image has been added</string>
 </resources>
