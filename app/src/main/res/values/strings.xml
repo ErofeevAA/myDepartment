@@ -30,4 +30,5 @@
     <string name="alert_check_field">Check all field on the correct</string>
     <string name="alert_wrong_password_length">Password length must be more than 9 characters and less than 31</string>
     <string name="toast_reg_success">Registration has been successfully</string>
+    <string name="item_comment_teacher">Teacher</string>
 </resources>
