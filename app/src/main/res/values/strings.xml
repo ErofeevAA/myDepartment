@@ -30,7 +30,10 @@
     <string name="alert_check_field">Check all field on the correct</string>
     <string name="alert_wrong_password_length">Password length must be more than 9 characters and less than 31</string>
     <string name="toast_reg_success">Registration has been successfully</string>
-    <string name="item_comment_teacher">Teacher</string>
     <string name="you_can_add_your_image">You can add your image</string>
     <string name="image_has_been_added">Image has been added</string>
+    <string name="reply_to">Reply to:</string>
+    <string name="title_section">Sections</string>
+    <string name="title_comments">Comments</string>
+    <string name="file_has_attached">File has attached</string>
 </resources>

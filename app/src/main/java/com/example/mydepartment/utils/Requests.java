@@ -2,15 +2,19 @@ package com.example.mydepartment.utils;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Environment;
 import android.util.Log;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
 
 public class Requests {
@@ -26,7 +30,7 @@ public class Requests {
         //for local test
         // 192.168.1.48
         // 192.168.43.79
-        final String URL_API = "http://192.168.1.48/api";
+        final String URL_API = "http://192.168.43.79/api";
 
         try {
             URL url = new URL(URL_API + uri);
@@ -88,6 +92,46 @@ public class Requests {
         return null;
     }
 
+    public void loadPDF(String link) {
+        int count;
+        try {
+            URL url = new URL(link);
+            URLConnection connection = url.openConnection();
+            connection.connect();
+
+            InputStream input = new BufferedInputStream(url.openStream(),
+                    8192);
+            Log.d("path", Environment
+                    .getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString());
+
+            int index = 0;
+            for (int i = link.length() - 1; ; --i) {
+                if (link.charAt(i) == '/') {
+                    index = i;
+                    break;
+                }
+            }
+            String fileName = link.substring(index);
+
+            OutputStream output = new FileOutputStream(Environment
+                    .getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString()
+                    + fileName);
+
+            byte[] data = new byte[1024];
+
+            while ((count = input.read(data)) != -1) {
+                output.write(data, 0, count);
+            }
+
+            output.flush();
+            output.close();
+            input.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public void login(String data) {
         final String URI = "/login";
         method = "POST";
@@ -121,10 +165,16 @@ public class Requests {
         send(URI, null);
     }
 
-    public void comments(String subjectID, String sectionID) {
+    public void getComments(String subjectID, String sectionID) {
         method = "GET";
         final String URI = "/subjects/" + subjectID + "/sections/" + sectionID + "/comments";
         send(URI, null);
+    }
+
+    public void sendComments(String subjectID, String sectionID, String data) {
+        method = "POST";
+        final String URI = "/subjects/" + subjectID + "/sections/" + sectionID + "/comments";
+        send(URI, data);
     }
 
     public void groups() {

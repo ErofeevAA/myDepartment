@@ -16,6 +16,7 @@ import android.view.View;
 import com.example.mydepartment.adapter.SectionAdapter;
 import com.example.mydepartment.databinding.ActivitySectionsBinding;
 import com.example.mydepartment.dialog.FailDialogBuilder;
+import com.example.mydepartment.utils.LocalStorage;
 import com.example.mydepartment.utils.Requests;
 
 import org.json.JSONArray;
@@ -26,10 +27,16 @@ import java.util.ArrayList;
 
 public class SectionsActivity extends AppCompatActivity {
     private ActivitySectionsBinding binding;
+
     private RecyclerView recyclerView;
+
     private String subjectID;
+
     private String response = "[]";
+
     private JSONArray jsonArray;
+
+    private LocalStorage storage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +44,9 @@ public class SectionsActivity extends AppCompatActivity {
         binding = ActivitySectionsBinding.inflate(getLayoutInflater());
         View root = binding.getRoot();
         setContentView(root);
+
+        storage = new LocalStorage(this);
+
         subjectID = getIntent().getStringExtra("subject_id");
         recyclerView = binding.sectionsList;
 
@@ -76,7 +86,7 @@ public class SectionsActivity extends AppCompatActivity {
                         getString(R.string.alert_connection_failed)).show();
                 return;
             }
-            if (response.equals("[]")) {
+            if (msg.what == 404) {
                 binding.textNothing.setVisibility(View.VISIBLE);
                 recyclerView.setVisibility(View.GONE);
                 return;
@@ -89,9 +99,11 @@ public class SectionsActivity extends AppCompatActivity {
 
     private final Runnable runnable = () -> {
         Requests requests = new Requests();
+        requests.setToken(storage.getToken());
         requests.sections(subjectID);
         response = requests.getResponse();
         Log.d("response", response);
+        Log.d("status", String.valueOf(requests.getStatusCode()));
         handler.sendEmptyMessage(requests.getStatusCode());
     };
 

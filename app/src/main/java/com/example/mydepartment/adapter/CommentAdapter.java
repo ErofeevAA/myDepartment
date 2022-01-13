@@ -2,10 +2,12 @@ package com.example.mydepartment.adapter;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -21,6 +23,8 @@ public class CommentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     private final ArrayList<Comment> comments;
 
     private CommentAdapter.OnItemClickListener listener;
+    private OnPDFClickListener pdfClickListener;
+
 
     public CommentAdapter(Context context, ArrayList<Comment> comments) {
         this.inflater = LayoutInflater.from(context);
@@ -31,10 +35,19 @@ public class CommentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         this.listener = listener;
     }
 
+    public void setPDFClickListener(OnPDFClickListener listener) {
+        pdfClickListener = listener;
+    }
+
+    public void addComment(Comment comment) {
+        comments.add(comment);
+    }
+
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
+        View view = inflater.inflate(R.layout.list_item_comment, parent, false);
+        return new CommentAdapter.ViewHolder(view);
     }
 
     @Override
@@ -43,13 +56,22 @@ public class CommentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         ViewHolder viewHolder = (ViewHolder) holder;
         viewHolder.name.setText(comment.name);
         viewHolder.text.setText(comment.text);
-        if (comment.isTeacher) {
-            viewHolder.teacher.setVisibility(View.VISIBLE);
+        if (comment.replyName != null) {
+            viewHolder.layoutReplyComment.setVisibility(View.VISIBLE);
+            viewHolder.replyToUser.setText(comment.replyName);
         }
         if (comment.avatar != null) {
+            Log.d("AdapterAvatar", "We are here");
             viewHolder.avatar.setImageBitmap(comment.avatar);
         }
-        viewHolder.itemView.setOnClickListener(v -> listener.onItemClick(position));
+        if (comment.linkToPdf != null) {
+            viewHolder.pdf.setVisibility(View.VISIBLE);
+            viewHolder.pdf.setOnClickListener(v -> {
+                Log.d("click", comment.linkToPdf);
+                pdfClickListener.onItemClick(comment.linkToPdf);
+            });
+        }
+        viewHolder.itemView.setOnClickListener(v -> listener.onItemClick(comment.id, comment.name));
     }
 
     @Override
@@ -58,25 +80,37 @@ public class CommentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     }
 
     private static class ViewHolder extends RecyclerView.ViewHolder {
-        final TextView name, text, teacher;
-        final ImageView avatar;
+        final TextView name, text, prevReply, replyToUser;
+        final ImageView avatar, pdf;
+        final LinearLayout layoutReplyComment;
 
         ViewHolder(View view) {
             super(view);
-            name = view.findViewById(R.id.name_section);
-            text = view.findViewById(R.id.text_section);
-            teacher = view.findViewById(R.id.text_view_teacher);
+            name = view.findViewById(R.id.text_view_user_name);
+            text = view.findViewById(R.id.item_comment_text);
+            prevReply = view.findViewById(R.id.text_view_prev_reply);
+            replyToUser = view.findViewById(R.id.text_view_user_get_reply);
             avatar = view.findViewById(R.id.image_view_avatar);
+            layoutReplyComment = view.findViewById(R.id.layout_reply_comment);
+            pdf = view.findViewById(R.id.image_view_pdf_comment);
         }
     }
 
     public interface OnItemClickListener {
-        void onItemClick(int position);
+        void onItemClick(String id, String name);
+    }
+
+    public interface OnPDFClickListener {
+        void onItemClick(String link);
     }
 
     public static class Comment {
+        public String id;
         public String name, text;
-        public boolean isTeacher = false;
+        public String replyName = null;
+        public String replyID = null;
+        public String linkToPdf = null;
+
         public Bitmap avatar = null;
 
         public Comment(String name, String text) {

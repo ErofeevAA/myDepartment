@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="4dp"
@@ -21,31 +22,60 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toEndOf="@+id/image_view_avatar"
-        android:layout_toStartOf="@id/text_view_teacher"
+        android:layout_toStartOf="@id/layout_reply_comment"
         android:layout_alignParentTop="true"
-        android:textSize="19sp"
+        android:textSize="20sp"
         android:text="Test Testovich"
-        android:id="@+id/text_view_user_name"/>
+        android:id="@+id/text_view_user_name"
+        tools:ignore="HardcodedText" />
 
-    <TextView
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="7dp"
-        android:id="@+id/text_view_teacher"
-        android:text="@string/item_comment_teacher"
-        android:textStyle="bold"
-        android:textSize="15sp"
-        />
+        android:id="@+id/layout_reply_comment"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/text_view_prev_reply"
+            android:text="@string/reply_to"
+            android:textSize="15sp"
+            android:layout_marginEnd="5dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="7dp"
+            android:id="@+id/text_view_user_get_reply"
+            android:text="Baran"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:visibility="visible"
+            tools:ignore="HardcodedText" />
+    </LinearLayout>
 
     <TextView
+        android:id="@+id/item_comment_text"
         android:layout_marginStart="7dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toEndOf="@id/image_view_avatar"
         android:layout_alignParentEnd="true"
+        android:layout_marginEnd="4dp"
         android:layout_below="@id/text_view_user_name"
-        android:textSize="15sp"
-        android:text="Для надёжного доступа вы знаете к чему пользуйтесь вы знаете чем и продолжайте продолжать а то чё вы это самое ляяяяяяя" />
+        android:textSize="16sp"
+        android:text="Для надёжного доступа вы знаете к чему пользуйтесь вы знаете чем и продолжайте продолжать а то чё вы это самое ляяяяяяя"
+        tools:ignore="HardcodedText" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_baseline_picture_as_pdf_24"
+        android:layout_below="@id/image_view_avatar"
+        android:id="@+id/image_view_pdf_comment"
+        android:visibility="gone"/>
 
 </RelativeLayout>
