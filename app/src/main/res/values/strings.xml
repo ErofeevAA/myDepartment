@@ -7,7 +7,7 @@
     <string name="sign_up">Sign up</string>
     <string name="name">Name</string>
     <string name="surname">Surname</string>
-    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_main">My Department</string>
     <string name="title_home">Home</string>
     <string name="title_subjects">Subjects</string>
     <string name="title_notifications">Notifications</string>
@@ -36,4 +36,6 @@
     <string name="title_section">Sections</string>
     <string name="title_comments">Comments</string>
     <string name="file_has_attached">File has attached</string>
+    <string name="no_notifications">No notifications</string>
+    <string name="viewed">Viewed</string>
 </resources>

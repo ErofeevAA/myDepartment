@@ -2,6 +2,7 @@ package com.example.mydepartment.utils;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Environment;
 import android.util.Log;
 
@@ -174,6 +175,24 @@ public class Requests {
     public void sendComments(String subjectID, String sectionID, String data) {
         method = "POST";
         final String URI = "/subjects/" + subjectID + "/sections/" + sectionID + "/comments";
+        send(URI, data);
+    }
+
+    public void getNotifications() {
+        method = "GET";
+        final String URI = "/notifications";
+        send(URI, null);
+    }
+
+    public void sendNotificationsID(String id) {
+        method = "PATCH";
+        final String URI = "/notifications/" + id;
+        send(URI, null);
+    }
+
+    public void sendFCMToken(String data) {
+        method = "POST";
+        final String URI = "/notifications";
         send(URI, data);
     }
 
