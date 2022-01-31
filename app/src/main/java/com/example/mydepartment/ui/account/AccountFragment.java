@@ -24,6 +24,8 @@ public class AccountFragment extends Fragment {
 
     private LocalStorage storage;
 
+    private boolean isActiveFragment = true;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         storage = new LocalStorage(requireContext());
@@ -64,7 +66,7 @@ public class AccountFragment extends Fragment {
             super.run();
             Requests requests = new Requests();
             Bitmap bitmap = requests.loadImage(url);
-            if (bitmap != null) {
+            if (bitmap != null && isActiveFragment) {
                 requireActivity().runOnUiThread(() -> binding.imageViewAvatar.setImageBitmap(bitmap));
             }
         }
@@ -101,6 +103,7 @@ public class AccountFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        isActiveFragment = false;
         binding = null;
     }
 }
