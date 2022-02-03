@@ -50,7 +50,8 @@ public class NotificationsFragment extends Fragment {
         return root;
     }
 
-    private final NotificationAdapter.OnItemClickListener listener = (n, position) -> new Thread(() -> {
+    private final NotificationAdapter.OnItemButtonClickListener buttonClickListener = (n, position)
+            -> new Thread(() -> {
         Requests requests = new Requests();
         requests.setToken(storage.getToken());
         for (int i = 0; i < n.ids.size(); ++i) {
@@ -61,6 +62,10 @@ public class NotificationsFragment extends Fragment {
             assert adapter != null;
             adapter.remove(position);
             adapter.notifyDataSetChanged();
+            if (adapter.getItemCount() == 0) {
+                binding.recyclerListNotifications.setVisibility(View.GONE);
+                binding.textViewNoNotifications.setVisibility(View.VISIBLE);
+            }
         });
     }).start();
 
@@ -121,7 +126,7 @@ public class NotificationsFragment extends Fragment {
             e.printStackTrace();
         }
         NotificationAdapter adapter = new NotificationAdapter(getContext(), arrayList);
-        adapter.setListener(listener);
+        adapter.setListener(buttonClickListener);
         binding.recyclerListNotifications.setAdapter(adapter);
     }
 

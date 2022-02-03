@@ -5,8 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -19,7 +17,7 @@ import java.util.ArrayList;
 public class NotificationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private final LayoutInflater inflater;
     private ArrayList<Notification> notifications;
-    private OnItemClickListener listener;
+    private OnItemButtonClickListener listener;
 
 
     public NotificationAdapter(Context context, ArrayList<Notification> array) {
@@ -27,7 +25,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         notifications = array;
     }
 
-    public void setListener(OnItemClickListener listener) {
+    public void setListener(OnItemButtonClickListener listener) {
         this.listener = listener;
     }
 
@@ -71,7 +69,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         public ArrayList<String> ids;
     }
 
-    public interface OnItemClickListener {
+    public interface OnItemButtonClickListener {
         void onItemClick(Notification n, int position);
     }
 }
