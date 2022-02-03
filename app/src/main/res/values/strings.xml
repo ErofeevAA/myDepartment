@@ -38,4 +38,6 @@
     <string name="no_notifications">No notifications</string>
     <string name="viewed">Viewed</string>
     <string name="too_large_file">The file must be ≤ 10 mb</string>
+    <string name="download_file">Download File</string>
+    <string name="downloaded">Downloaded</string>
 </resources>

@@ -106,12 +106,12 @@ public class CommentsActivity extends AppCompatActivity {
     };
 
     CommentAdapter.OnPDFClickListener pdfClickListener = link -> {
-        Toast.makeText(getApplicationContext(), "Download File", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), R.string.download_file, Toast.LENGTH_SHORT).show();
         new Thread(() -> {
             Requests requests = new Requests();
             requests.loadPDF(link);
             runOnUiThread(() -> Toast.makeText(CommentsActivity.this,
-                    "Downloaded", Toast.LENGTH_SHORT).show());
+                    R.string.downloaded, Toast.LENGTH_SHORT).show());
         }).start();
     };
 

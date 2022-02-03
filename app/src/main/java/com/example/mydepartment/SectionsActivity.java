@@ -12,6 +12,7 @@ import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.mydepartment.adapter.SectionAdapter;
 import com.example.mydepartment.databinding.ActivitySectionsBinding;
@@ -72,9 +73,15 @@ public class SectionsActivity extends AppCompatActivity {
         Log.d("selected", s);
     };
 
-    private final  SectionAdapter.OnPDFClickListener pdfClickListener = (int position) -> {
-        Log.d("pdfClick", String.valueOf(position));
-        Log.d("pdfClick", "it nothing");
+    private final  SectionAdapter.OnPDFClickListener pdfClickListener = (String fileLink) -> {
+        Toast.makeText(getApplicationContext(), R.string.download_file, Toast.LENGTH_SHORT).show();
+        Log.d("pdfClick", fileLink);
+        new Thread(() -> {
+                Requests requests = new Requests();
+                requests.loadPDF(fileLink);
+                runOnUiThread(() ->
+                        Toast.makeText(getApplicationContext(), R.string.downloaded, Toast.LENGTH_SHORT).show());
+            }).start();
     };
 
     private final Handler handler = new Handler(Looper.getMainLooper()) {
@@ -118,8 +125,10 @@ public class SectionsActivity extends AppCompatActivity {
 
                 SectionAdapter.Section section = new SectionAdapter.Section(name, text);
 
-                if (!object.getString("file").equals("null")) {
-                    section.hasFile = true;
+                String fileLink = object.getString("file");
+
+                if (!fileLink.equals("null")) {
+                    section.fileLink = fileLink;
                 }
 
                 sections.add(section);

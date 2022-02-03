@@ -38,4 +38,6 @@
     <string name="no_notifications">通知なし</string>
     <string name="viewed">見た</string>
     <string name="too_large_file">ファイルは10未満である必要があります</string>
+    <string name="download_file">ファイルのダウンロード</string>
+    <string name="downloaded">ダウンロード済み</string>
 </resources>

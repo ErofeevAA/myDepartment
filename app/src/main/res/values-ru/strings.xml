@@ -38,4 +38,6 @@
     <string name="no_notifications">Нет уведомлений</string>
     <string name="viewed">Прочитано</string>
     <string name="too_large_file">Файл должен быть ≤ 10 МБ</string>
+    <string name="download_file">Загружаем файл</string>
+    <string name="downloaded">Файл загружен</string>
 </resources>

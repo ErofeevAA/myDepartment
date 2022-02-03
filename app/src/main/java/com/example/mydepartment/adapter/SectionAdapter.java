@@ -48,9 +48,9 @@ public class SectionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         ViewHolder viewHolder = (ViewHolder) holder;
         viewHolder.name.setText(section.name);
         viewHolder.text.setText(section.text);
-        if (section.hasFile) {
+        if (section.fileLink != null) {
             viewHolder.pdf.setVisibility(View.VISIBLE);
-            viewHolder.pdf.setOnClickListener(v -> pdfClickListener.onClick(position));
+            viewHolder.pdf.setOnClickListener(v -> pdfClickListener.onClick(section.fileLink));
         }
 
         viewHolder.itemView.setOnClickListener(v -> listener.onItemClick(position));
@@ -75,7 +75,7 @@ public class SectionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     public static class Section {
         public String name, text;
-        public boolean hasFile = false;
+        public String fileLink = null;
 
         public Section(String name, String text) {
             this.name = name;
@@ -88,6 +88,6 @@ public class SectionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     }
 
     public interface OnPDFClickListener {
-        void onClick(int position);
+        void onClick(String fileLink);
     }
 }
