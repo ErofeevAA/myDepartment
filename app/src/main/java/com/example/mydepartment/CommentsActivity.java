@@ -306,12 +306,22 @@ public class CommentsActivity extends AppCompatActivity {
                         try {
                             //del 'raw:' from path
                             File file = new File(filePath.substring(4));
+
+                            double fileSize = (double) file.length() / (1024 * 1024);
+
+                            if (fileSize > 10) {
+                                Toast.makeText(getApplicationContext(), R.string.too_large_file, Toast.LENGTH_SHORT).show();
+                            }
+
                             FileInputStream fileInputStream = new FileInputStream(file);
 
                             byte[] bytes = new byte[(int) file.length()];
                             fileInputStream.read(bytes);
 
                             encodedFile = Base64.encodeToString(bytes, Base64.DEFAULT);
+                            if (encodedFile != null) {
+                                binding.layoutInfoAttachFile.setVisibility(View.VISIBLE);
+                            }
                             Log.d("encodedFile", encodedFile);
                             Log.d("fileName", file.getName());
                         } catch (IOException e) {
@@ -325,8 +335,6 @@ public class CommentsActivity extends AppCompatActivity {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("application/pdf");
         someActivityResultLauncher.launch(intent);
-        binding.layoutInfoAttachFile.setVisibility(View.VISIBLE);
-
     }
 
     private void sendMessage() {
