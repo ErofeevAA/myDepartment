@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
-import android.content.Context;
+// import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -21,7 +21,7 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
+// import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -228,6 +228,13 @@ public class CommentsActivity extends AppCompatActivity {
             comment.replyName = replyName;
             commentAdapter.addComment(comment);
             commentAdapter.notifyDataSetChanged();
+
+            listCommentsRecyclerView.smoothScrollToPosition(commentAdapter.getItemCount() - 1);
+
+            message = "";
+            encodedFile = null;
+            replyCommentID = null;
+            progressBar.setVisibility(View.GONE);
         });
 
     };
@@ -351,7 +358,13 @@ public class CommentsActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Empty message", Toast.LENGTH_SHORT).show();
             return;
         }
-        hiddenKeyboard();
+        // hiddenKeyboard();
+
+        messageEditText.setText("");
+        progressBar.setVisibility(View.VISIBLE);
+        binding.layoutInfoAttachFile.setVisibility(View.GONE);
+        binding.layoutInfoAttachFile.setVisibility(View.GONE);
+
         new Thread(sendCommentRunnable).start();
     }
 
@@ -365,16 +378,16 @@ public class CommentsActivity extends AppCompatActivity {
         replyCommentID = null;
     }
 
-    private void hiddenKeyboard() {
-        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
-    }
+    /* private void hiddenKeyboard() {
+    *    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+    *    imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
+    } */
 
     @Override
     public boolean onKeyUp(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_ENTER) {
             sendMessage();
-            hiddenKeyboard();
+            // hiddenKeyboard();
 
         }
         return super.onKeyUp(keyCode, event);
