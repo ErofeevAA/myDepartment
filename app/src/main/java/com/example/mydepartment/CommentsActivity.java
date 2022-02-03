@@ -237,17 +237,17 @@ public class CommentsActivity extends AppCompatActivity {
             return null;
         }
 
-        String id = "";
-        String text = "";
-        String author = "";
-        String pdfLink = "";
-        String replyID = null;
-        String replyName = null;
-        Bitmap avatar = null;
-
         ArrayList<CommentAdapter.Comment> comments = new ArrayList<>();
 
         for(int i = 0; i < commentJSONArray.length(); ++i) {
+            String id = "";
+            String text = "";
+            String author = "";
+            String pdfLink = "";
+            String replyID = null;
+            String replyName = null;
+            Bitmap avatar = null;
+
             try {
                 JSONObject object = commentJSONArray.getJSONObject(i);
 
@@ -289,8 +289,6 @@ public class CommentsActivity extends AppCompatActivity {
                 if (replyID != null) {
                     c.replyID = replyID;
                     c.replyName = replyName;
-                    replyID = null;
-                    replyName = null;
                 }
                 comments.add(c);
         }
