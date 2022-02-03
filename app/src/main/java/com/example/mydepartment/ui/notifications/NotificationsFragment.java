@@ -126,7 +126,7 @@ public class NotificationsFragment extends Fragment {
             e.printStackTrace();
         }
         NotificationAdapter adapter = new NotificationAdapter(getContext(), arrayList);
-        adapter.setListener(buttonClickListener);
+        adapter.setButtonClickListener(buttonClickListener);
         binding.recyclerListNotifications.setAdapter(adapter);
     }
 

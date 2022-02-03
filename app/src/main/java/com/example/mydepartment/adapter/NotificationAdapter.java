@@ -25,7 +25,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         notifications = array;
     }
 
-    public void setListener(OnItemButtonClickListener listener) {
+    public void setButtonClickListener(OnItemButtonClickListener listener) {
         this.listener = listener;
     }
 
