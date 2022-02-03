@@ -189,7 +189,7 @@ public class CommentsActivity extends AppCompatActivity {
             String id = "";
             String text = "";
             String author = "";
-            String pdfLink = null;
+            String pdfLink = "";
             String replyID = null;
             String replyName = null;
             Bitmap avatar = null;
