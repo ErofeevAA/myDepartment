@@ -24,6 +24,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.mydepartment.adapter.CommentAdapter;
@@ -50,6 +51,7 @@ public class CommentsActivity extends AppCompatActivity {
     private JSONArray commentJSONArray = null;
 
     private RecyclerView listCommentsRecyclerView;
+    private ProgressBar progressBar;
 
     private EditText messageEditText;
 
@@ -83,6 +85,8 @@ public class CommentsActivity extends AppCompatActivity {
         ImageView sendMassageImageView = binding.imageViewSend;
 
         messageEditText = binding.editTextMessage;
+
+        progressBar = binding.progressBar;
 
         attachFileImageView.setOnClickListener(v -> attachFile());
         sendMassageImageView.setOnClickListener(v -> sendMessage());
@@ -149,6 +153,7 @@ public class CommentsActivity extends AppCompatActivity {
             commentAdapter.setPDFClickListener(pdfClickListener);
             commentAdapter.setListener(itemClickListener);
             listCommentsRecyclerView.setAdapter(commentAdapter);
+            progressBar.setVisibility(View.GONE);
         });
         handler.sendEmptyMessage(status);
     };
