@@ -64,6 +64,8 @@ public class CommentsActivity extends AppCompatActivity {
 
     private CommentAdapter commentAdapter;
 
+    private boolean isDestroyActivity = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -149,6 +151,9 @@ public class CommentsActivity extends AppCompatActivity {
 
         ArrayList<CommentAdapter.Comment> comments = parseToArrayList(requests);
         runOnUiThread(() -> {
+            if (isDestroyActivity) {
+                return;
+            }
             commentAdapter = new CommentAdapter(CommentsActivity.this, comments);
             commentAdapter.setPDFClickListener(pdfClickListener);
             commentAdapter.setListener(itemClickListener);
@@ -375,5 +380,11 @@ public class CommentsActivity extends AppCompatActivity {
 
         }
         return super.onKeyUp(keyCode, event);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        isDestroyActivity = true;
     }
 }
