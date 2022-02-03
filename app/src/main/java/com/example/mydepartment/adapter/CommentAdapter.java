@@ -79,6 +79,11 @@ public class CommentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         return comments.size();
     }
 
+    @Override
+    public int getItemViewType(int position) {
+        return position;
+    }
+
     private static class ViewHolder extends RecyclerView.ViewHolder {
         final TextView name, text, prevReply, replyToUser;
         final ImageView avatar, pdf;
