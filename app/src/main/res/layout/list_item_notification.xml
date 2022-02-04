@@ -5,7 +5,8 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:weightSum="1"
-    android:gravity="center">
+    android:gravity="center"
+    android:id="@+id/layout_item_notification">
 
     <TextView
         android:layout_width="0dp"

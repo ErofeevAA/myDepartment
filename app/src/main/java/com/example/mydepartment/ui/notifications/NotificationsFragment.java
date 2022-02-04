@@ -1,5 +1,6 @@
 package com.example.mydepartment.ui.notifications;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -13,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.example.mydepartment.CommentsActivity;
 import com.example.mydepartment.R;
 import com.example.mydepartment.adapter.NotificationAdapter;
 import com.example.mydepartment.databinding.FragmentNotificationsBinding;
@@ -69,6 +71,35 @@ public class NotificationsFragment extends Fragment {
         });
     }).start();
 
+    private final NotificationAdapter.OnItemClickListener itemClickListener = (n, position) -> {
+        binding.notificationProgressBar.setVisibility(View.VISIBLE);
+
+        NotificationAdapter adapter = (NotificationAdapter) binding.recyclerListNotifications.getAdapter();
+        assert adapter != null;
+        adapter.remove(position);
+        adapter.notifyDataSetChanged();
+        if (adapter.getItemCount() == 0) {
+            binding.recyclerListNotifications.setVisibility(View.GONE);
+            binding.textViewNoNotifications.setVisibility(View.VISIBLE);
+        }
+
+        new Thread(() -> {
+            Requests requests = new Requests();
+            requests.setToken(storage.getToken());
+            for (int i = 0; i < n.ids.size(); ++i) {
+                requests.sendNotificationsID(n.ids.get(i));
+            }
+            requireActivity().runOnUiThread(() -> {
+                binding.notificationProgressBar.setVisibility(View.GONE);
+
+                Intent intent = new Intent(requireActivity(), CommentsActivity.class);
+                intent.putExtra("subject_id", n.subjectID);
+                intent.putExtra("section_id", n.sectionID);
+                startActivity(intent);
+            });
+        }).start();
+    };
+
     private final Handler handlerNotifications = new Handler(Looper.getMainLooper()) {
         @Override
         public void handleMessage(@NonNull Message msg) {
@@ -109,7 +140,10 @@ public class NotificationsFragment extends Fragment {
 
             for (int i = 0; i < jsonArray.length(); ++i) {
                 JSONObject object = jsonArray.getJSONObject(i);
+
                 String text = object.getJSONObject("notification").getString("text");
+                String subjectID = object.getJSONObject("notification").getString("subject_id");
+                String sectionID = object.getJSONObject("notification").getString("section_id");
 
                 JSONArray idsJsonArray = object.getJSONArray("ids");
                 ArrayList<String> ids = new ArrayList<>();
@@ -120,6 +154,8 @@ public class NotificationsFragment extends Fragment {
                 NotificationAdapter.Notification n = new NotificationAdapter.Notification();
                 n.ids = ids;
                 n.text = text;
+                n.subjectID = subjectID;
+                n.sectionID = sectionID;
                 arrayList.add(n);
             }
         } catch (JSONException e) {
@@ -127,6 +163,7 @@ public class NotificationsFragment extends Fragment {
         }
         NotificationAdapter adapter = new NotificationAdapter(getContext(), arrayList);
         adapter.setButtonClickListener(buttonClickListener);
+        adapter.setItemClickListener(itemClickListener);
         binding.recyclerListNotifications.setAdapter(adapter);
     }
 

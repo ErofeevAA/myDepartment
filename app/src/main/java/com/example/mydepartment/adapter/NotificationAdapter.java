@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,8 +18,8 @@ import java.util.ArrayList;
 public class NotificationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private final LayoutInflater inflater;
     private ArrayList<Notification> notifications;
-    private OnItemButtonClickListener listener;
-
+    private OnItemButtonClickListener itemButtonClickListener;
+    private OnItemClickListener itemClickListener;
 
     public NotificationAdapter(Context context, ArrayList<Notification> array) {
         this.inflater = LayoutInflater.from(context);
@@ -26,7 +27,11 @@ public class NotificationAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     }
 
     public void setButtonClickListener(OnItemButtonClickListener listener) {
-        this.listener = listener;
+        this.itemButtonClickListener = listener;
+    }
+
+    public void setItemClickListener(OnItemClickListener listener) {
+        this.itemClickListener = listener;
     }
 
     public void remove(int pos) {
@@ -44,7 +49,8 @@ public class NotificationAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         Notification notif = notifications.get(position);
         ViewHolder viewHolder = (ViewHolder) holder;
-        viewHolder.send.setOnClickListener(v -> listener.onItemClick(notif, position));
+        viewHolder.root.setOnClickListener(v -> itemClickListener.onItemClick(notif, position));
+        viewHolder.send.setOnClickListener(v -> itemButtonClickListener.onItemClick(notif, position));
         viewHolder.text.setText(notif.text);
     }
 
@@ -53,23 +59,36 @@ public class NotificationAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         return notifications.size();
     }
 
+    @Override
+    public int getItemViewType(int position) {
+        return position;
+    }
+
     private static class ViewHolder extends RecyclerView.ViewHolder {
         final TextView text;
         final Button send;
+        final LinearLayout root;
 
         ViewHolder(View view) {
             super(view);
             text = view.findViewById(R.id.text_view_notifications);
             send = view.findViewById(R.id.button_item_send);
+            root = view.findViewById(R.id.layout_item_notification);
         }
     }
 
     public static class Notification {
         public String text;
         public ArrayList<String> ids;
+        public String subjectID = "";
+        public String sectionID = "";
     }
 
     public interface OnItemButtonClickListener {
+        void onItemClick(Notification n, int position);
+    }
+
+    public interface OnItemClickListener {
         void onItemClick(Notification n, int position);
     }
 }
